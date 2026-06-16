@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Redis 缓存服务（本地已运行，已注释）
+  # 本地 Redis 配置：端口 6379，密码 myredispwd
+  # 如需使用 Docker Redis，请取消注释并停止本地 Redis
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: wallpaper-redis
+  #   ports:
+  #     - "6379:6379"
+  #   command: redis-server --appendonly yes --requirepass myredispwd
+  #   volumes:
+  #     - redis_data:/data
+  #   restart: unless-stopped
+
+  # MinIO 对象存储（已运行在 9000/9001，此处仅供参考）
+  # minio:
+  #   image: minio/minio:latest
+  #   container_name: wallpaper-minio
+  #   ports:
+  #     - "9000:9000"
+  #     - "9001:9001"
+  #   environment:
+  #     MINIO_ROOT_USER: myadmin
+  #     MINIO_ROOT_PASSWORD: myadminpwd
+  #   command: server /data --console-address ":9001"
+  #   volumes:
+  #     - minio_data:/data
+  #   restart: unless-stopped
+
+volumes:
+  redis_data:
+    driver: local
+  minio_data:
+    driver: local

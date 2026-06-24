@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc0802e2-edfc-47a0-84e0-ba7434b8da7e" name="更改" comment="启动bug修复----已跑通">
-      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/minio-init.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/minio-init.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/server/entrypoint.sh" afterDir="false" />
+    <list default="true" id="dc0802e2-edfc-47a0-84e0-ba7434b8da7e" name="更改" comment="windows启动">
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,61 +42,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000002835290707" />
-      <entry key="MS500" value="1.0495345788757713" />
-      <entry key="S2" value="1.8967252990547325" />
-      <entry key="S5" value="3.7572226857409445" />
-      <entry key="S10" value="5.940510637799831" />
-      <entry key="S30" value="15.470254401655916" />
-      <entry key="S60" value="25.97736945329211" />
-      <entry key="M2" value="36.314044732885954" />
-      <entry key="M5" value="48.60252359128819" />
-      <entry key="M10" value="57.41056572715658" />
-      <entry key="M15" value="62.73519857613503" />
-      <entry key="M30" value="71.75993719403247" />
-      <entry key="H1" value="79.63564133194012" />
-      <entry key="H2" value="87.64508759991023" />
-      <entry key="H4" value="96.39571165514785" />
-      <entry key="D1" value="110.7475957334605" />
-      <entry key="W1" value="114.35490800008843" />
+      <entry key="MS100" value="1.0000000000161886" />
+      <entry key="MS500" value="1.0147095476018633" />
+      <entry key="S2" value="2.089564598848089" />
+      <entry key="S5" value="3.9849127838882583" />
+      <entry key="S10" value="5.792422715214298" />
+      <entry key="S30" value="13.478664279454089" />
+      <entry key="S60" value="24.473777218963054" />
+      <entry key="M2" value="37.372302262654614" />
+      <entry key="M5" value="53.13661005853479" />
+      <entry key="M10" value="63.733161314043016" />
+      <entry key="M15" value="69.77675868603251" />
+      <entry key="M30" value="79.6366063415787" />
+      <entry key="H1" value="88.0119626185529" />
+      <entry key="H2" value="96.30214423478152" />
+      <entry key="H4" value="105.20739218763788" />
+      <entry key="D1" value="119.71161970317927" />
+      <entry key="W1" value="123.34960394505337" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="1.081952760064E-311" />
-      <entry key="S2" value="1.8136441307707822E-78" />
-      <entry key="S5" value="8.006096673741422E-32" />
-      <entry key="S10" value="2.8295046693266613E-16" />
-      <entry key="S30" value="6.5650313601021616E-6" />
-      <entry key="S60" value="0.002562231714756135" />
-      <entry key="M2" value="0.05061849182617088" />
-      <entry key="M5" value="0.3031961487410922" />
-      <entry key="M10" value="0.5506324990889719" />
-      <entry key="M15" value="0.6718024334132032" />
-      <entry key="M30" value="0.8206611858962564" />
-      <entry key="H1" value="0.9505424125411811" />
-      <entry key="H2" value="1.2520209351142435" />
-      <entry key="H4" value="1.7506238440220236" />
-      <entry key="D1" value="2.7035885334503114" />
-      <entry key="W1" value="2.9547741023948664" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="1.95133296207279E-84" />
+      <entry key="S5" value="3.2819544732860496E-34" />
+      <entry key="S10" value="1.8116165359385617E-17" />
+      <entry key="S30" value="2.6263670755206687E-6" />
+      <entry key="S60" value="0.0016206070083523232" />
+      <entry key="M2" value="0.04025676351064897" />
+      <entry key="M5" value="0.27665310097532325" />
+      <entry key="M10" value="0.5259782326863867" />
+      <entry key="M15" value="0.6515966756912274" />
+      <entry key="M30" value="0.8082254787034882" />
+      <entry key="H1" value="0.9433130039144026" />
+      <entry key="H2" value="1.2472506866865256" />
+      <entry key="H4" value="1.7472856889169885" />
+      <entry key="D1" value="2.7027286326817612" />
+      <entry key="W1" value="2.9546398280036774" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9592643894258305" />
-      <entry key="MS500" value="1.0407738103348543" />
-      <entry key="S2" value="1.8927569572827843" />
-      <entry key="S5" value="3.754293065912688" />
-      <entry key="S10" value="5.93826245146236" />
-      <entry key="S30" value="15.468333599230977" />
-      <entry key="S60" value="25.97825484039016" />
-      <entry key="M2" value="36.36286328136808" />
-      <entry key="M5" value="48.903285962644304" />
-      <entry key="M10" value="57.95905037539975" />
-      <entry key="M15" value="63.405222616818726" />
-      <entry key="M30" value="72.5794629448455" />
-      <entry key="H1" value="80.58551440304939" />
-      <entry key="H2" value="88.89669615189945" />
-      <entry key="H4" value="98.14607296826406" />
-      <entry key="D1" value="113.45112318788756" />
-      <entry key="W1" value="117.30967273038935" />
+      <entry key="MS100" value="0.9794202976026534" />
+      <entry key="MS500" value="1.0104647118673964" />
+      <entry key="S2" value="2.0865196443955796" />
+      <entry key="S5" value="3.982180148980434" />
+      <entry key="S10" value="5.790327528662828" />
+      <entry key="S30" value="13.476991544534641" />
+      <entry key="S60" value="24.473834721855624" />
+      <entry key="M2" value="37.41086135676644" />
+      <entry key="M5" value="53.41093202887981" />
+      <entry key="M10" value="64.2570319659326" />
+      <entry key="M15" value="70.4265930356711" />
+      <entry key="M30" value="80.44369480111027" />
+      <entry key="H1" value="88.95460195712973" />
+      <entry key="H2" value="97.54897939726241" />
+      <entry key="H4" value="106.95441348887144" />
+      <entry key="D1" value="122.41428688319476" />
+      <entry key="W1" value="126.304234345232" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -155,7 +150,7 @@
       <workItem from="1782222251847" duration="168000" />
       <workItem from="1782222424080" duration="1048000" />
       <workItem from="1782266652011" duration="12561000" />
-      <workItem from="1782312898675" duration="2488000" />
+      <workItem from="1782312898675" duration="2529000" />
     </task>
     <task id="LOCAL-00001" summary="ui初始化">
       <option name="closed" value="true" />
@@ -221,7 +216,15 @@
       <option name="project" value="LOCAL" />
       <updated>1782288786820</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="windows启动">
+      <option name="closed" value="true" />
+      <created>1782315404213</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1782315404213</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -246,6 +249,7 @@
     <MESSAGE value="docker compose" />
     <MESSAGE value="docker compose启动" />
     <MESSAGE value="启动bug修复----已跑通" />
-    <option name="LAST_COMMIT_MESSAGE" value="启动bug修复----已跑通" />
+    <MESSAGE value="windows启动" />
+    <option name="LAST_COMMIT_MESSAGE" value="windows启动" />
   </component>
 </project>

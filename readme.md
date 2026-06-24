@@ -10,6 +10,8 @@ cp .env.example .env
 docker compose --profile prod up -d --build
 ```
 
+具体参考docker目录下的README.md
+
 # 坑
 1 windows 使用CRLF换行符会有问题
 

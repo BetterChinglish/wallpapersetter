@@ -5,10 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc0802e2-edfc-47a0-84e0-ba7434b8da7e" name="更改" comment="启动bug修复----已跑通">
+      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.workbuddy/memory/2026-06-24.md" beforeDir="false" afterPath="$PROJECT_DIR$/.workbuddy/memory/2026-06-24.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallpapersetter-ui/wallpapersetter-ui.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/wallpapersetter-ui/wallpapersetter-ui.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallpapersetter-ui/wallpapersetter-ui/ContentView.swift" beforeDir="false" afterPath="$PROJECT_DIR$/wallpapersetter-ui/wallpapersetter-ui/ContentView.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/minio-init.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/minio-init.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/entrypoint.sh" beforeDir="false" afterPath="$PROJECT_DIR$/server/entrypoint.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,73 +35,73 @@
     &quot;assignee&quot;: &quot;BetterChinglish&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/BetterChinglish/wallpapersetter.git&quot;,
-    &quot;accountId&quot;: &quot;8d054741-7021-45b4-849c-6761c3be972e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/BetterChinglish/wallpapersetter.git",
+    "accountId": "0e4ca6a4-395f-4da7-9d2b-aecd23420ef6"
   }
-}</component>
+}]]></component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0000000000000613" />
-      <entry key="MS500" value="1.0023060798750505" />
-      <entry key="S2" value="1.3726068119375423" />
-      <entry key="S5" value="2.4533621003387345" />
-      <entry key="S10" value="3.3874389317779894" />
-      <entry key="S30" value="4.360815521411616" />
-      <entry key="S60" value="4.6655766528757106" />
-      <entry key="M2" value="4.828972856078809" />
-      <entry key="M5" value="4.964353180237715" />
-      <entry key="M10" value="5.224950943044062" />
-      <entry key="M15" value="5.489757470464492" />
-      <entry key="M30" value="6.031177515554359" />
-      <entry key="H1" value="7.280173488157427" />
-      <entry key="H2" value="11.32538202999135" />
-      <entry key="H4" value="17.605384707385294" />
-      <entry key="D1" value="28.69740098417144" />
-      <entry key="W1" value="31.499557980243853" />
+      <entry key="MS100" value="1.0000002835290707" />
+      <entry key="MS500" value="1.0495345788757713" />
+      <entry key="S2" value="1.8967252990547325" />
+      <entry key="S5" value="3.7572226857409445" />
+      <entry key="S10" value="5.940510637799831" />
+      <entry key="S30" value="15.470254401655916" />
+      <entry key="S60" value="25.97736945329211" />
+      <entry key="M2" value="36.314044732885954" />
+      <entry key="M5" value="48.60252359128819" />
+      <entry key="M10" value="57.41056572715658" />
+      <entry key="M15" value="62.73519857613503" />
+      <entry key="M30" value="71.75993719403247" />
+      <entry key="H1" value="79.63564133194012" />
+      <entry key="H2" value="87.64508759991023" />
+      <entry key="H4" value="96.39571165514785" />
+      <entry key="D1" value="110.7475957334605" />
+      <entry key="W1" value="114.35490800008843" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="0.0" />
-      <entry key="S5" value="0.0" />
-      <entry key="S10" value="0.0" />
-      <entry key="S30" value="3.4019841588825955E-170" />
-      <entry key="S60" value="1.8452769477533688E-85" />
-      <entry key="M2" value="4.385822457884084E-43" />
-      <entry key="M5" value="1.3722637368868991E-17" />
-      <entry key="M10" value="4.91760398804932E-9" />
-      <entry key="M15" value="3.5867865982131685E-6" />
-      <entry key="M30" value="0.002656767739648779" />
-      <entry key="H1" value="0.07274457854087793" />
-      <entry key="H2" value="0.3812340834637475" />
-      <entry key="H4" value="0.8730817487561768" />
-      <entry key="D1" value="1.7419126593793117" />
-      <entry key="W1" value="1.9609108952178287" />
+      <entry key="MS500" value="1.081952760064E-311" />
+      <entry key="S2" value="1.8136441307707822E-78" />
+      <entry key="S5" value="8.006096673741422E-32" />
+      <entry key="S10" value="2.8295046693266613E-16" />
+      <entry key="S30" value="6.5650313601021616E-6" />
+      <entry key="S60" value="0.002562231714756135" />
+      <entry key="M2" value="0.05061849182617088" />
+      <entry key="M5" value="0.3031961487410922" />
+      <entry key="M10" value="0.5506324990889719" />
+      <entry key="M15" value="0.6718024334132032" />
+      <entry key="M30" value="0.8206611858962564" />
+      <entry key="H1" value="0.9505424125411811" />
+      <entry key="H2" value="1.2520209351142435" />
+      <entry key="H4" value="1.7506238440220236" />
+      <entry key="D1" value="2.7035885334503114" />
+      <entry key="W1" value="2.9547741023948664" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9794202975869865" />
-      <entry key="MS500" value="0.998143053236437" />
-      <entry key="S2" value="1.3709648302514066" />
-      <entry key="S5" value="2.451907746490703" />
-      <entry key="S10" value="3.386349176466178" />
-      <entry key="S30" value="4.360323510892422" />
-      <entry key="S60" value="4.665310282414398" />
-      <entry key="M2" value="4.82883419522634" />
-      <entry key="M5" value="4.964296038925405" />
-      <entry key="M10" value="5.224921100591403" />
-      <entry key="M15" value="5.489740321793806" />
-      <entry key="M30" value="6.033821034429164" />
-      <entry key="H1" value="7.352882711129721" />
-      <entry key="H2" value="11.706534673964091" />
-      <entry key="H4" value="18.478374430426314" />
-      <entry key="D1" value="30.43928309557757" />
-      <entry key="W1" value="33.460463961836375" />
+      <entry key="MS100" value="0.9592643894258305" />
+      <entry key="MS500" value="1.0407738103348543" />
+      <entry key="S2" value="1.8927569572827843" />
+      <entry key="S5" value="3.754293065912688" />
+      <entry key="S10" value="5.93826245146236" />
+      <entry key="S30" value="15.468333599230977" />
+      <entry key="S60" value="25.97825484039016" />
+      <entry key="M2" value="36.36286328136808" />
+      <entry key="M5" value="48.903285962644304" />
+      <entry key="M10" value="57.95905037539975" />
+      <entry key="M15" value="63.405222616818726" />
+      <entry key="M30" value="72.5794629448455" />
+      <entry key="H1" value="80.58551440304939" />
+      <entry key="H2" value="88.89669615189945" />
+      <entry key="H4" value="98.14607296826406" />
+      <entry key="D1" value="113.45112318788756" />
+      <entry key="W1" value="117.30967273038935" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -111,30 +113,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "javascript.preferred.runtime.type.id": "node",
-    "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "/Users/qsj/workspace/wallpapersetter",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "to.speed.mode.migration.done": "true",
-    "ts.external.directory.path": "/Users/qsj/workspace/wallpapersetter/server/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/qsj/workspace/wallpapersetter&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/qsj/workspace/wallpapersetter/server/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -153,6 +155,7 @@
       <workItem from="1782222251847" duration="168000" />
       <workItem from="1782222424080" duration="1048000" />
       <workItem from="1782266652011" duration="12561000" />
+      <workItem from="1782312898675" duration="2488000" />
     </task>
     <task id="LOCAL-00001" summary="ui初始化">
       <option name="closed" value="true" />

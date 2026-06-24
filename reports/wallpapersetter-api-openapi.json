@@ -1,0 +1,503 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Wallpaper Setter API",
+    "description": "动态壁纸后台管理系统 API 接口文档\n\n## 基础信息\n- **基础地址**: `http://localhost:3000`\n- **认证方式**: Bearer Token（JWT）\n- **通用响应格式**: `{ code: string, data?: any, message?: string }`\n\n## 通用返回码\n| code | 说明 |\n|------|------|\n| SUCCESS | 请求成功 |\n| PENDING | 等待中（扫码登录轮询） |\n| INTERNAL_ERROR | 服务器内部错误 |\n| UNAUTHORIZED | 未授权 |\n| TOKEN_EXPIRED | Token 已过期 |\n| TOKEN_INVALID | Token 无效 |\n| USER_NOT_FOUND | 用户不存在 |\n| INVALID_PARAM | 参数错误 |\n| NO_FILE | 未上传文件 |\n| MISSING_TITLE | 缺少标题 |\n| WALLPAPER_NOT_FOUND | 壁纸不存在 |\n| QRCODE_EXPIRED | 二维码已过期 |",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Wallpaper Setter Team"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "本地开发环境"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": ["系统"],
+        "summary": "健康检查",
+        "description": "检查服务器运行状态",
+        "operationId": "healthCheck",
+        "responses": {
+          "200": {
+            "description": "服务器运行正常",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string", "example": "ok" },
+                    "timestamp": { "type": "string", "format": "date-time" },
+                    "uptime": { "type": "number", "description": "运行时长（秒）" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/wechat/qrcode": {
+      "get": {
+        "tags": ["认证"],
+        "summary": "生成微信登录二维码",
+        "description": "生成微信扫描登录二维码。返回 sceneId 用于轮询登录状态，有效期 5 分钟。",
+        "operationId": "generateWechatQrCode",
+        "responses": {
+          "200": {
+            "description": "成功获取二维码信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string", "example": "SUCCESS" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "sceneId": { "type": "string", "description": "场景值 ID，用于后续轮询" },
+                        "qrcodeUrl": { "type": "string", "description": "微信授权 URL" },
+                        "expiresIn": { "type": "integer", "description": "过期时间（秒）", "example": 300 }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/wechat/poll": {
+      "get": {
+        "tags": ["认证"],
+        "summary": "轮询微信登录状态",
+        "description": "根据 sceneId 轮询用户是否已完成扫码登录。\n\n**状态流转**:\n- 初始状态: `pending` → 返回 `code: PENDING`\n- 扫码后: 返回 `code: SUCCESS` 并携带 JWT Token\n- 过期: 返回 `code: QRCODE_EXPIRED`",
+        "operationId": "pollWechatAuthStatus",
+        "parameters": [
+          {
+            "name": "sceneId",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "生成二维码时返回的 sceneId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "认证结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "code": { "type": "string", "example": "PENDING" },
+                        "message": { "type": "string", "example": "等待扫码" }
+                      }
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "code": { "type": "string", "example": "SUCCESS" },
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "token": { "type": "string", "description": "JWT Token，有效期 7 天" },
+                            "user": {
+                              "type": "object",
+                              "properties": {
+                                "id": { "type": "string", "format": "uuid" },
+                                "nickname": { "type": "string" },
+                                "avatarUrl": { "type": "string" }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "缺少 sceneId 参数",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string", "example": "INVALID_PARAM" },
+                    "message": { "type": "string", "example": "缺少 sceneId 参数" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "二维码已过期",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string", "example": "QRCODE_EXPIRED" },
+                    "message": { "type": "string", "example": "二维码已过期" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/wechat/callback": {
+      "get": {
+        "tags": ["认证"],
+        "summary": "微信登录回调",
+        "description": "微信 OAuth2 回调接口。生产环境收到微信回调后，用 code 换取 access_token，再获取用户信息。开发阶段返回模拟成功页面。",
+        "operationId": "wechatCallback",
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "微信授权码"
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "场景值（即 sceneId）"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功页（HTML）或错误提示",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "<html><body><h1>登录成功！</h1><p>请关闭此窗口，返回应用。</p></body></html>"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "参数错误"
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": ["认证"],
+        "summary": "退出登录",
+        "description": "将当前 JWT Token 加入 Redis 黑名单（1 小时后自动过期失效）。",
+        "operationId": "logout",
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "退出成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string", "example": "SUCCESS" },
+                    "message": { "type": "string", "example": "退出成功" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallpapers/upload": {
+      "post": {
+        "tags": ["壁纸"],
+        "summary": "上传壁纸文件",
+        "description": "上传 HTML 动态壁纸文件到 MinIO，并在数据库中创建记录。限制文件大小 ≤ 10MB，仅支持 HTML 格式。",
+        "operationId": "uploadWallpaper",
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": ["file", "title"],
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "HTML 壁纸文件（≤10MB）"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "壁纸标题",
+                    "maxLength": 128,
+                    "example": "极光动态壁纸"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "壁纸描述"
+                  },
+                  "tags": {
+                    "type": "string",
+                    "description": "标签（JSON 格式字符串，当前预留暂未使用）"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "上传成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string", "example": "SUCCESS" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string", "format": "uuid" },
+                        "title": { "type": "string" },
+                        "fileUrl": { "type": "string", "description": "MinIO 文件访问 URL" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    { "type": "object", "properties": { "code": { "type": "string", "example": "NO_FILE" }, "message": { "type": "string" } } },
+                    { "type": "object", "properties": { "code": { "type": "string", "example": "MISSING_TITLE" }, "message": { "type": "string" } } }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallpapers": {
+      "get": {
+        "tags": ["壁纸"],
+        "summary": "获取壁纸列表",
+        "description": "分页获取已发布且已审核的壁纸列表。支持排序和 Redis 缓存（5 分钟）。不需要鉴权。",
+        "operationId": "getWallpapers",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 1, "minimum": 1 },
+            "description": "页码"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer", "default": 20, "maximum": 100 },
+            "description": "每页数量"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "enum": ["latest", "popular"], "default": "latest" },
+            "description": "排序方式：latest（最新）、popular（最热）"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "壁纸列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string", "example": "SUCCESS" },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "wallpapers": {
+                          "type": "array",
+                          "items": { "$ref": "#/components/schemas/Wallpaper" }
+                        },
+                        "pagination": {
+                          "type": "object",
+                          "properties": {
+                            "page": { "type": "integer" },
+                            "limit": { "type": "integer" },
+                            "total": { "type": "integer" },
+                            "totalPages": { "type": "integer" }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallpapers/{id}": {
+      "get": {
+        "tags": ["壁纸"],
+        "summary": "获取壁纸详情",
+        "description": "根据壁纸 ID 获取详细信息，包含作者信息。",
+        "operationId": "getWallpaperDetail",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" },
+            "description": "壁纸 ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "壁纸详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string", "example": "SUCCESS" },
+                    "data": { "$ref": "#/components/schemas/Wallpaper" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "壁纸不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string", "example": "WALLPAPER_NOT_FOUND" },
+                    "message": { "type": "string", "example": "壁纸不存在" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wallpapers/{id}/download": {
+      "post": {
+        "tags": ["壁纸"],
+        "summary": "增加下载计数",
+        "description": "壁纸下载次数 +1，并清除所有壁纸列表缓存。不需要鉴权。",
+        "operationId": "incrementDownloadCount",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" },
+            "description": "壁纸 ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "下载计数更新成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": { "type": "string", "example": "SUCCESS" },
+                    "message": { "type": "string", "example": "下载计数已更新" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "在 Authorization 头中使用 `Bearer <token>` 格式传递 JWT Token。Token 通过微信扫码登录获取，有效期 7 天。"
+      }
+    },
+    "schemas": {
+      "Wallpaper": {
+        "type": "object",
+        "description": "壁纸模型",
+        "properties": {
+          "id": { "type": "string", "format": "uuid", "description": "壁纸 ID" },
+          "title": { "type": "string", "description": "壁纸标题", "maxLength": 128 },
+          "description": { "type": "string", "description": "壁纸描述", "nullable": true },
+          "type": { "type": "string", "enum": ["VIDEO", "WEB"], "description": "壁纸类型：VIDEO（视频）、WEB（HTML）" },
+          "contentUrl": { "type": "string", "description": "壁纸文件 URL", "nullable": true },
+          "videoLocal": { "type": "boolean", "description": "视频是否本地播放", "default": false },
+          "thumbnailUrl": { "type": "string", "description": "缩略图 URL", "nullable": true },
+          "fileSize": { "type": "integer", "description": "文件大小（字节）", "nullable": true },
+          "authorId": { "type": "string", "format": "uuid", "description": "作者 ID" },
+          "author": {
+            "type": "object",
+            "description": "作者信息摘要",
+            "properties": {
+              "id": { "type": "string" },
+              "nickname": { "type": "string", "nullable": true },
+              "avatarUrl": { "type": "string", "nullable": true }
+            }
+          },
+          "viewCount": { "type": "integer", "description": "浏览次数", "default": 0 },
+          "downloadCount": { "type": "integer", "description": "下载次数", "default": 0 },
+          "likeCount": { "type": "integer", "description": "点赞次数", "default": 0 },
+          "isPublished": { "type": "boolean", "description": "是否已发布" },
+          "isApproved": { "type": "boolean", "description": "是否已审核" },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "系统",
+      "description": "系统管理接口"
+    },
+    {
+      "name": "认证",
+      "description": "微信扫码登录与鉴权"
+    },
+    {
+      "name": "壁纸",
+      "description": "壁纸 CRUD 与上传"
+    }
+  ]
+}

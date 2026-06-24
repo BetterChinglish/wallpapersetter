@@ -1,25 +1,16 @@
 import SwiftUI
-import Playgrounds
 
-@main struct MyApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-    }
-}
+// ContentView is now a convenience wrapper for preview/testing.
+// The main entry point is WallpaperSetterApp.swift in the App/ folder.
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        MainView()
+            .environment(AppViewModel())
     }
 }
 
 #Preview {
     ContentView()
-}
-
-#Playground {
-    _ = 1 + 2
+        .frame(width: 1100, height: 760)
 }

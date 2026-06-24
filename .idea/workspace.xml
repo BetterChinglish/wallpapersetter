@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="dc0802e2-edfc-47a0-84e0-ba7434b8da7e" name="更改" comment="ui初始化" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,6 +19,18 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "BetterChinglish"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/BetterChinglish/wallpapersetter.git",
+    "accountId": "8d054741-7021-45b4-849c-6761c3be972e"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -29,12 +44,17 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/Users/qsj/workspace/wallpapersetter",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
     "to.speed.mode.migration.done": "true",
@@ -57,6 +77,7 @@
       <updated>1781589477711</updated>
       <workItem from="1781589479066" duration="51000" />
       <workItem from="1782222251847" duration="168000" />
+      <workItem from="1782222424080" duration="1048000" />
     </task>
     <task id="LOCAL-00001" summary="ui初始化">
       <option name="closed" value="true" />
@@ -82,13 +103,32 @@
       <option name="project" value="LOCAL" />
       <updated>1782222401854</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ui初始化">
+      <option name="closed" value="true" />
+      <created>1782222444833</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1782222444833</updated>
+    </task>
+    <task id="LOCAL-00005" summary="ui初始化">
+      <option name="closed" value="true" />
+      <created>1782222762913</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1782222762913</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/wallpapersetter-ui" />
+    </ignored-roots>
     <MESSAGE value="ui初始化" />
     <option name="LAST_COMMIT_MESSAGE" value="ui初始化" />
   </component>

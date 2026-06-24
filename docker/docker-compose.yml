@@ -1,0 +1,209 @@
+# =============================================================================
+# Wallpaper Setter — top-level orchestration
+#
+# Usage:
+#   cp docker/.env.example docker/.env
+#   docker compose --profile prod up -d --build
+#
+# Dev mode (hot reload, source mounted in):
+#   docker compose --profile dev up --build
+#
+# Stop + remove everything (keeps dockerCache/):
+#   docker compose --profile prod down
+#   docker compose --profile dev down
+#
+# Nuclear reset (also wipe dockerCache/ — IRREVERSIBLE):
+#   docker compose --profile prod down -v
+#   rm -rf dockerCache/
+# =============================================================================
+name: wallpapersetter
+
+services:
+  # ================= PostgreSQL =================
+  postgres:
+    image: postgres:16-alpine
+    container_name: wp-postgres
+    profiles: [prod, dev]
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "${POSTGRES_PORT}:5432"
+    volumes:
+      - ../dockerCache/postgresqlCache:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  # ================= Redis =================
+  redis:
+    image: redis:7-alpine
+    container_name: wp-redis
+    profiles: [prod, dev]
+    restart: unless-stopped
+    command:
+      - sh
+      - -c
+      - |
+        if [ -n "$$REDIS_PASSWORD" ]; then
+          exec redis-server --appendonly yes --requirepass "$$REDIS_PASSWORD"
+        else
+          exec redis-server --appendonly yes
+        fi
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+    ports:
+      - "${REDIS_PORT}:6379"
+    volumes:
+      - ../dockerCache/redisCache:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  # ================= MinIO (object storage) =================
+  minio:
+    image: minio/minio:latest
+    container_name: wp-minio
+    profiles: [prod, dev]
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    command: server /data --console-address ":9001"
+    ports:
+      - "${MINIO_API_PORT}:9000"
+      - "${MINIO_CONSOLE_PORT}:9001"
+    volumes:
+      - ../dockerCache/minioCache:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+  # ================= MinIO bucket initializer (one-shot) =================
+  minio-init:
+    image: minio/mc:latest
+    container_name: wp-minio-init
+    profiles: [prod, dev]
+    depends_on:
+      minio:
+        condition: service_healthy
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_USE_SSL: ${MINIO_USE_SSL}
+    entrypoint: ["/bin/sh", "/scripts/minio-init.sh"]
+    volumes:
+      - ./minio-init.sh:/scripts/minio-init.sh:ro
+    restart: "no"
+
+  # ================= Backend (production — compiled JS) =================
+  server:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+      target: prod
+    image: wallpaper-setter-server:${SERVER_IMAGE_TAG}
+    container_name: wp-server
+    profiles: [prod]
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${SERVER_PORT}
+      # Inside the docker network, services are addressed by name
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_USE_SSL: ${MINIO_USE_SSL}
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
+      WECHAT_APP_ID: ${WECHAT_APP_ID}
+      WECHAT_APP_SECRET: ${WECHAT_APP_SECRET}
+      WECHAT_REDIRECT_URI: ${WECHAT_REDIRECT_URI}
+    ports:
+      - "${SERVER_PORT}:3000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 20s
+
+  # ================= Backend (dev — ts-node-dev, source mounted) =================
+  server-dev:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+      target: dev
+    image: wallpaper-setter-server:dev
+    container_name: wp-server-dev
+    profiles: [dev]
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio-init:
+        condition: service_completed_successfully
+    environment:
+      NODE_ENV: development
+      PORT: ${SERVER_PORT}
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?schema=public
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+      MINIO_ENDPOINT: minio
+      MINIO_PORT: 9000
+      MINIO_USE_SSL: ${MINIO_USE_SSL}
+      MINIO_ACCESS_KEY: ${MINIO_ROOT_USER}
+      MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+      MINIO_BUCKET_NAME: ${MINIO_BUCKET_NAME}
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN}
+      WECHAT_APP_ID: ${WECHAT_APP_ID}
+      WECHAT_APP_SECRET: ${WECHAT_APP_SECRET}
+      WECHAT_REDIRECT_URI: ${WECHAT_REDIRECT_URI}
+    # Live-reload: mount source so edits on host are visible to ts-node-dev.
+    # node_modules is overridden to use the container's own install.
+    volumes:
+      - ../server/src:/app/src:ro
+      - ../server/prisma:/app/prisma:ro
+      - ../server/package.json:/app/package.json:ro
+      - ../server/tsconfig.json:/app/tsconfig.json:ro
+      - ../server/entrypoint.sh:/app/entrypoint.sh:ro
+    command: ["npx", "ts-node-dev", "--respawn", "--transpile-only", "src/index.ts"]
+    ports:
+      - "${SERVER_PORT}:3000"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 20s

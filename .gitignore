@@ -1,0 +1,14 @@
+# Docker
+dockerCache/
+docker/.env
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Editor
+.idea/
+.vscode/
+*.swp

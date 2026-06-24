@@ -1,0 +1,47 @@
+#!/bin/sh
+# =============================================================================
+# MinIO bucket initializer — runs as a one-shot sidecar.
+# - Waits for the minio container to be reachable on the API port
+# - Uses the bundled `mc` client to:
+#     1. configure an alias to the local server
+#     2. create the bucket if it does not exist
+# - Exits 0 on success so the server can depend on it with `service_completed_successfully`
+# =============================================================================
+set -e
+
+: "${MINIO_ROOT_USER:?MINIO_ROOT_USER is required}"
+: "${MINIO_ROOT_PASSWORD:?MINIO_ROOT_PASSWORD is required}"
+: "${MINIO_BUCKET_NAME:?MINIO_BUCKET_NAME is required}"
+: "${MINIO_ENDPOINT:=minio}"
+: "${MINIO_PORT:=9000}"
+: "${MINIO_USE_SSL:=false}"
+
+ALIAS="local"
+SCHEME="http"
+if [ "$MINIO_USE_SSL" = "true" ]; then SCHEME="https"; fi
+
+echo "[minio-init] Waiting for MinIO at ${MINIO_ENDPOINT}:${MINIO_PORT} ..."
+ATTEMPTS=0
+MAX_ATTEMPTS=30
+until mc alias set "$ALIAS" "${SCHEME}://${MINIO_ENDPOINT}:${MINIO_PORT}" "$MINIO_ROOT_USER" "$MINIO_ROOT_PASSWORD" >/dev/null 2>&1; do
+  ATTEMPTS=$((ATTEMPTS + 1))
+  if [ "$ATTEMPTS" -ge "$MAX_ATTEMPTS" ]; then
+    echo "[minio-init] ❌ MinIO not reachable after ${MAX_ATTEMPTS} attempts."
+    exit 1
+  fi
+  echo "[minio-init]   not ready (attempt $ATTEMPTS/$MAX_ATTEMPTS), retrying in 3s ..."
+  sleep 3
+done
+
+echo "[minio-init] ✅ MinIO reachable."
+
+# Create the bucket (mc mb is idempotent on existing buckets, but we suppress noise)
+if mc ls "$ALIAS/$MINIO_BUCKET_NAME" >/dev/null 2>&1; then
+  echo "[minio-init] Bucket '$MINIO_BUCKET_NAME' already exists."
+else
+  echo "[minio-init] Creating bucket '$MINIO_BUCKET_NAME' ..."
+  mc mb "$ALIAS/$MINIO_BUCKET_NAME"
+  echo "[minio-init] ✅ Bucket created."
+fi
+
+echo "[minio-init] Done."

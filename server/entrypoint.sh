@@ -77,7 +77,7 @@ if [ "$HAS_MIGRATIONS" = "yes" ]; then
   npx prisma migrate deploy
 else
   echo "[entrypoint] No migration history → running 'prisma db push' (first-time schema sync) ..."
-  npx prisma db push --skip-generate --accept-data-loss
+  npx prisma db push --accept-data-loss
 fi
 
 echo "[entrypoint] ✅ Database ready."

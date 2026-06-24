@@ -16,7 +16,7 @@ router.get('/wechat/qrcode', async (_req: Request, res: Response) => {
     const sceneId = `wallpaper_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
     
     // 存储场景值到 Redis（过期时间 5 分钟）
-    await redis.setex(`wechat_auth:${sceneId}`, 300, JSON.stringify({
+    await redis.setEx(`wechat_auth:${sceneId}`, 300, JSON.stringify({
       status: 'pending',
       createdAt: Date.now(),
     }));
@@ -164,7 +164,7 @@ router.post('/logout', async (req: Request, res: Response) => {
       const token = authHeader.substring(7);
       
       // 将 Token 加入黑名单（1 小时后过期）
-      await redis.setex(`token_blacklist:${token}`, 3600, '1');
+      await redis.setEx(`token_blacklist:${token}`, 3600, '1');
     }
 
     res.json({

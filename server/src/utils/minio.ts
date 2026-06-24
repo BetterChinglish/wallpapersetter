@@ -36,3 +36,8 @@ export async function deleteFile(bucketName: string, objectName: string) {
 }
 
 export { minioClient };
+
+// Re-export bucket name as a constant for callers that need it without
+// having to thread it through every function. Reads from env so it stays
+// in sync with .env / docker-compose configuration.
+export const BUCKET_NAME = process.env.MINIO_BUCKET_NAME || 'wallpapers';

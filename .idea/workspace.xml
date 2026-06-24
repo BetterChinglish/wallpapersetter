@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc0802e2-edfc-47a0-84e0-ba7434b8da7e" name="更改" comment="ui初始化" />
+    <list default="true" id="dc0802e2-edfc-47a0-84e0-ba7434b8da7e" name="更改" comment="docker compose">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.workbuddy/memory/2026-06-24.md" beforeDir="false" afterPath="$PROJECT_DIR$/.workbuddy/memory/2026-06-24.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/server/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/routes/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/routes/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/routes/wallpapers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/routes/wallpapers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/utils/minio.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/utils/minio.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,22 +24,88 @@
       <entry key="_/Users/qsj/workspace/wallpapersetter" value="3FCqcMMrh7M9rX0yOmYWikXHWfw" />
     </persistenceIdMap>
   </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="31" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "BetterChinglish"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;BetterChinglish&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/BetterChinglish/wallpapersetter.git",
-    "accountId": "8d054741-7021-45b4-849c-6761c3be972e"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/BetterChinglish/wallpapersetter.git&quot;,
+    &quot;accountId&quot;: &quot;8d054741-7021-45b4-849c-6761c3be972e&quot;
   }
-}]]></component>
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.2054553637843726E-7" />
+      <entry key="MS500" value="0.07143040954547471" />
+      <entry key="S2" value="0.8691443657313435" />
+      <entry key="S5" value="1.4329883080429835" />
+      <entry key="S10" value="1.6929121586123919" />
+      <entry key="S30" value="1.9204922238768594" />
+      <entry key="S60" value="2.3962859872247986" />
+      <entry key="M2" value="3.948653975853964" />
+      <entry key="M5" value="8.56690409991288" />
+      <entry key="M10" value="13.518132110761465" />
+      <entry key="M15" value="16.276564923253442" />
+      <entry key="M30" value="19.972724970232473" />
+      <entry key="H1" value="22.28900908617734" />
+      <entry key="H2" value="23.590602566935623" />
+      <entry key="H4" value="24.28120500559664" />
+      <entry key="D1" value="24.878187793329786" />
+      <entry key="W1" value="24.98254821934528" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.0000002026415473" />
+      <entry key="S60" value="1.000450157247214" />
+      <entry key="M2" value="1.021216909464244" />
+      <entry key="M5" value="1.214127698578844" />
+      <entry key="M10" value="1.462739341939762" />
+      <entry key="M15" value="1.5982613542912558" />
+      <entry key="M30" value="1.7734735640545547" />
+      <entry key="H1" value="1.8794734584139279" />
+      <entry key="H2" value="1.9378024623629047" />
+      <entry key="H4" value="1.9684020148486394" />
+      <entry key="D1" value="1.9946629639663214" />
+      <entry key="W1" value="1.9992358165816333" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="8.925299649275267E-4" />
+      <entry key="MS500" value="0.3164719024814528" />
+      <entry key="S2" value="1.571567665792178" />
+      <entry key="S5" value="2.3009784654231424" />
+      <entry key="S10" value="2.624518160057765" />
+      <entry key="S30" value="2.897057712172681" />
+      <entry key="S60" value="3.384329202648173" />
+      <entry key="M2" value="4.962474002040355" />
+      <entry key="M5" value="9.776522630160528" />
+      <entry key="M10" value="14.97777425693294" />
+      <entry key="M15" value="17.8724512947142" />
+      <entry key="M30" value="21.744804912383533" />
+      <entry key="H1" value="24.16772159441838" />
+      <entry key="H2" value="25.52800660222511" />
+      <entry key="H4" value="26.24940305389736" />
+      <entry key="D1" value="26.872816078944005" />
+      <entry key="W1" value="26.981779064808077" />
+    </decayedShown>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 1
@@ -42,6 +117,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -49,6 +125,7 @@
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "master",
+    "javascript.preferred.runtime.type.id": "node",
     "junie.onboarding.icon.badge.shown": "true",
     "last_opened_file_path": "/Users/qsj/workspace/wallpapersetter",
     "node.js.detected.package.eslint": "true",
@@ -78,6 +155,7 @@
       <workItem from="1781589479066" duration="51000" />
       <workItem from="1782222251847" duration="168000" />
       <workItem from="1782222424080" duration="1048000" />
+      <workItem from="1782266652011" duration="5385000" />
     </task>
     <task id="LOCAL-00001" summary="ui初始化">
       <option name="closed" value="true" />
@@ -119,17 +197,37 @@
       <option name="project" value="LOCAL" />
       <updated>1782222762913</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="docker compose">
+      <option name="closed" value="true" />
+      <created>1782268079056</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1782268079056</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/wallpapersetter-ui" />
     </ignored-roots>
     <MESSAGE value="ui初始化" />
-    <option name="LAST_COMMIT_MESSAGE" value="ui初始化" />
+    <MESSAGE value="docker compose" />
+    <option name="LAST_COMMIT_MESSAGE" value="docker compose" />
   </component>
 </project>

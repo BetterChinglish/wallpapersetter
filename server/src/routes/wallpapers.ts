@@ -59,19 +59,20 @@ router.post(
       );
 
       // 获取文件 URL
-      const fileUrl = getFileUrl(fileName);
+      const fileUrl = await getFileUrl(BUCKET_NAME, fileName);
 
       // 保存到数据库
       const wallpaper = await prisma.wallpaper.create({
         data: {
           title,
           description: description || null,
-          fileUrl,
-          fileKey: fileName,
+          type: 'WEB',
+          contentUrl: fileUrl,
+          thumbnailUrl: fileUrl,
           fileSize: req.file.size,
-          userId: req.user?.userId || null, // 允许匿名上传
-          tags: tags ? JSON.parse(tags) : [],
-          isPublic: true,
+          authorId: req.user?.userId || '00000000-0000-0000-0000-000000000000', // 匿名上传占位 UUID
+          isPublished: true,
+          isApproved: false,
         },
       });
 
@@ -174,7 +175,7 @@ router.get('/', async (req: Request, res: Response) => {
  */
 router.get('/:id', async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = String(req.params.id);
 
     const wallpaper = await prisma.wallpaper.findUnique({
       where: { id },
@@ -211,7 +212,7 @@ router.get('/:id', async (req: Request, res: Response) => {
  */
 router.post('/:id/download', async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const id = String(req.params.id);
 
     await prisma.wallpaper.update({
       where: { id },

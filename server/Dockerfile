@@ -28,9 +28,11 @@ ENV PRISMA_SKIP_POSTINSTALL_GENERATE=true
 FROM base AS deps
 COPY package.json package-lock.json* ./
 COPY prisma ./prisma
-# Generate prisma client against schema so @prisma/client has its types
-RUN npx prisma generate
+# Install ALL deps (incl. @prisma/client and prisma CLI) FIRST, then generate
+# the client against node_modules. Order matters: prisma generate needs the
+# @prisma/client runtime to resolve before it can write its output.
 RUN npm ci
+RUN npx prisma generate
 
 # ---------- dev ----------
 FROM deps AS dev
